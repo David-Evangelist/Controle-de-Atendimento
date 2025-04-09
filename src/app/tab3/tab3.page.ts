@@ -1,3 +1,4 @@
+import { SenhasService } from '../services/senhas.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,7 +8,8 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class Tab3Page {
+  constructor(public senhasService: SenhasService) {}
 
-  constructor() {}
-
+ 
+  
 }
