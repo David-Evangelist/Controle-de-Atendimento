@@ -9,7 +9,4 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
   constructor(public senhasService: SenhasService) {}
-
- 
-  
 }

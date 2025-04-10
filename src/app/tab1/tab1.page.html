@@ -13,10 +13,11 @@
 
   <ion-card>
     <ion-card-header>
+      <ion-label>Senha:</ion-label>
       <ion-input
         readonly="true"
-        label="Senha: "
-        value="{{senhasService.inputNovaSenha}}"
+        [value]="senhasService.inputNovaSenha"
+        class="input-senha"
       ></ion-input>
     </ion-card-header>
 
