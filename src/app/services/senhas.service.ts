@@ -13,6 +13,8 @@ export class SenhasService {
 
   public inputNovaSenha: string = '';
 
+  public senhaChamadaAtual: string = '';
+
   public ultimasChamadas: string[] = [];
 
   public filaSP: string[] = [];
@@ -105,10 +107,19 @@ export class SenhasService {
         proximaSenha = this.filaSG.shift()!;
         this.ultimaSenhaChamada = 'SG';
       }
-    } 
+    } else {
+      if (this.filaSE.length > 0) {
+        proximaSenha = this.filaSE.shift()!;
+        this.ultimaSenhaChamada = 'SE';
+      } else if (this.filaSG.length > 0) {
+        proximaSenha = this.filaSG.shift()!;
+        this.ultimaSenhaChamada = 'SG';
+      }
+    }
 
     if (proximaSenha !== '') {
       this.registrarChamada(proximaSenha);
+      this.senhaChamadaAtual = proximaSenha;
       console.log(`Senha chamada:  ${proximaSenha}`);
     } else {
       console.log('Não há senhas na fila');
