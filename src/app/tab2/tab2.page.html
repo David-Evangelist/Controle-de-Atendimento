@@ -1,28 +1,42 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Tab 2 </ion-title>
+    <ion-title> Controle de Atendimento </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <!-- <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Tab 2</ion-title>
     </ion-toolbar>
-  </ion-header>
+  </ion-header> -->
 
-  <ion-card>
+  <ion-card class="card">
     <ion-card-header>
-      <ion-title>Últimas senhas chamadas:</ion-title>
+      <ion-title>Última senha chamada:</ion-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-list *ngFor="let senha of senhasService.ultimasChamadas" >
+      <ion-input
+        readonly="true"
+        placeholder="000000-SX00"
+        [value]="senhasService.senhaChamadaAtual"
+        class="input-senha-atual"
+      ></ion-input>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="card card-ultimas-senhas">
+    <ion-card-header>
+      <ion-title>Últimas 5 senhas:</ion-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list *ngFor="let senha of senhasService.ultimasChamadas">
         <ion-item> {{senha}} </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
 
-  <ion-button (click)="senhasService.chamarProximaSenha()" expand="block" >
+  <ion-button (click)="senhasService.chamarProximaSenha()" expand="block">
     Chamar próxima senha
   </ion-button>
 </ion-content>
