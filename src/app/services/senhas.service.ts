@@ -28,6 +28,12 @@ export class SenhasService {
     SE: [''],
   };
 
+  public historicoAtendimentos: {
+    senha: string;
+    tipo: string;
+    tempo: number;
+  }[] = [];
+
   somaGeral() {
     this.senhasGeral++;
     this.senhasTotal++;
@@ -118,11 +124,34 @@ export class SenhasService {
     }
 
     if (proximaSenha !== '') {
+      const tipo = proximaSenha.split('-')[1].substring(0, 2);
+      const tempo = this.gerarTempoAtendimento(tipo);
+
       this.registrarChamada(proximaSenha);
       this.senhaChamadaAtual = proximaSenha;
+
+      this.historicoAtendimentos.push({
+        senha: proximaSenha,
+        tipo: tipo,
+        tempo: tempo,
+      });
+
       console.log(`Senha chamada:  ${proximaSenha}`);
+      console.log(`Tempo de atendimento estimado: ${tempo} min`);
     } else {
       console.log('Não há senhas na fila');
     }
+  }
+
+  gerarTempoAtendimento(tipo: string) {
+    if (tipo === 'SP') {
+      return 15 + Math.floor(Math.random() * 11) - 5;
+    } else if (tipo === 'SG') {
+      return 5 + Math.floor(Math.random() * 7) - 3;
+    } else if (tipo === 'SE') {
+      return Math.random() < 0.95 ? 1 : 5;
+    }
+
+    return 0;
   }
 }
