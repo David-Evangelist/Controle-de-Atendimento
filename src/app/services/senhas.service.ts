@@ -168,29 +168,22 @@ export class SenhasService {
     return 0;
   }
 
-  descartarSenhas() {
-    const descartarDeFila = (fila: string[], tipo: string) => {
-      const total = fila.length;
-      const quantidadeDescartar = Math.ceil(total * 0.05);
+  descartarSenhaAtual() {
+    if (this.senhaChamadaAtual !== '') {
+      const tipo = this.senhaChamadaAtual.split('-')[1].substring(0, 2);
 
-      for (let i = 0; i < quantidadeDescartar; i++) {
-        const indexAleatorio = Math.floor(Math.random() * fila.length);
-        const senhaRemovida = fila.splice(indexAleatorio, 1)[0];
+      this.senhasDescartadas.push({
+        senha: this.senhaChamadaAtual,
+        tipo: tipo,
+        horario: new Date().toLocaleString(),
+      });
 
-        if (senhaRemovida) {
-          this.senhasDescartadas.push({
-            senha: senhaRemovida,
-            tipo: tipo,
-            horario: new Date().toLocaleString(),
-          });
-        }
-      }
-    };
+      console.log(`Senha descartada: ${this.senhaChamadaAtual}`);
 
-    descartarDeFila(this.filaSP, 'SP');
-    descartarDeFila(this.filaSG, 'SG');
-    descartarDeFila(this.filaSE, 'SE');
-
-    console.log('Senhas descartadas:', this.senhasDescartadas);
+      this.senhaChamadaAtual = '';
+      this.tempoEstimadoAtual = 0;
+    } else {
+      console.log('Nenhuma senha em atendimento para descartar');
+    }
   }
 }

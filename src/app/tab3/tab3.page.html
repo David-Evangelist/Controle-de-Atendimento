@@ -19,10 +19,6 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-button (click)="senhasService.descartarSenhas()" expand="block" color="danger">
-    Descartar senhas não atendidas
-  </ion-button>
-
   <ion-card>
     <ion-card-header>
       <ion-card-title>Relatório Detalhado</ion-card-title>
@@ -44,7 +40,7 @@
 
   <ion-card>
     <ion-card-header>
-      <ion-title>Senhas Descartadas</ion-title>
+      <ion-title class="red-title">Senhas Descartadas</ion-title>
     </ion-card-header>
     <ion-card-content>
       <ion-list *ngFor="let item of senhasService.senhasDescartadas">
