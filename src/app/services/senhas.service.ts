@@ -15,7 +15,7 @@ export class SenhasService {
 
   public senhaChamadaAtual: string = '';
 
-  public tempoEstimadoAtual: number = 0
+  public tempoEstimadoAtual: number = 0;
 
   public ultimasChamadas: string[] = [];
 
@@ -34,6 +34,12 @@ export class SenhasService {
     senha: string;
     tipo: string;
     tempo: number;
+    horario: string;
+  }[] = [];
+
+  public senhasDescartadas: {
+    senha: string;
+    tipo: string;
     horario: string;
   }[] = [];
 
@@ -160,5 +166,31 @@ export class SenhasService {
     }
 
     return 0;
+  }
+
+  descartarSenhas() {
+    const descartarDeFila = (fila: string[], tipo: string) => {
+      const total = fila.length;
+      const quantidadeDescartar = Math.ceil(total * 0.05);
+
+      for (let i = 0; i < quantidadeDescartar; i++) {
+        const indexAleatorio = Math.floor(Math.random() * fila.length);
+        const senhaRemovida = fila.splice(indexAleatorio, 1)[0];
+
+        if (senhaRemovida) {
+          this.senhasDescartadas.push({
+            senha: senhaRemovida,
+            tipo: tipo,
+            horario: new Date().toLocaleString(),
+          });
+        }
+      }
+    };
+
+    descartarDeFila(this.filaSP, 'SP');
+    descartarDeFila(this.filaSG, 'SG');
+    descartarDeFila(this.filaSE, 'SE');
+
+    console.log('Senhas descartadas:', this.senhasDescartadas);
   }
 }
