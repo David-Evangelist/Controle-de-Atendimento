@@ -15,6 +15,8 @@ export class SenhasService {
 
   public senhaChamadaAtual: string = '';
 
+  public tempoEstimadoAtual: number = 0
+
   public ultimasChamadas: string[] = [];
 
   public filaSP: string[] = [];
@@ -126,6 +128,8 @@ export class SenhasService {
     if (proximaSenha !== '') {
       const tipo = proximaSenha.split('-')[1].substring(0, 2);
       const tempo = this.gerarTempoAtendimento(tipo);
+
+      this.tempoEstimadoAtual = tempo;
 
       this.registrarChamada(proximaSenha);
       this.senhaChamadaAtual = proximaSenha;
