@@ -34,6 +34,7 @@ export class SenhasService {
     senha: string;
     tipo: string;
     tempo: number;
+    horario: string;
   }[] = [];
 
   somaGeral() {
@@ -128,6 +129,7 @@ export class SenhasService {
     if (proximaSenha !== '') {
       const tipo = proximaSenha.split('-')[1].substring(0, 2);
       const tempo = this.gerarTempoAtendimento(tipo);
+      const horario = new Date().toLocaleString();
 
       this.tempoEstimadoAtual = tempo;
 
@@ -138,6 +140,7 @@ export class SenhasService {
         senha: proximaSenha,
         tipo: tipo,
         tempo: tempo,
+        horario: horario,
       });
 
       console.log(`Senha chamada:  ${proximaSenha}`);

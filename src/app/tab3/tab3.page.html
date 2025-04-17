@@ -5,12 +5,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header> -->
-
   <ion-card>
     <ion-card-content>
       <ion-list>
@@ -21,6 +15,25 @@
           Senhas Prioritárias: {{ senhasService.senhasPrior}}
         </ion-item>
         <ion-item> Senhas Exame: {{ senhasService.senhasExame}} </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Relatório Detalhado</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list *ngFor="let item of senhasService.historicoAtendimentos">
+        <ion-item>
+          <ion-label>
+            <h3>Senha: {{item.senha}}</h3>
+            <p>Tipo: {{item.tipo}}</p>
+            <p>Tempo Estimado: {{item.tempo}} minutos</p>
+            <p>Data/Hora: {{item.horario}}</p>
+          </ion-label>
+        </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
